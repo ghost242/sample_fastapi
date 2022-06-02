@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from app import service_initializer
+from src.app import service_initializer
 from src import service_app
 
 client = TestClient(service_app)
