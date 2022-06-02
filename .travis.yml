@@ -10,7 +10,3 @@ before_install:
 - docker ps -a
 script:
 - pytest -v
-before_deploy:
-  - echo "before_deploy"
-deploy:
-  - echo "deploy"
