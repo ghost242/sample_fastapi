@@ -15,7 +15,6 @@ pg8000 = "^1.29.1"
 pytest = "^7.1.2"
 requests = "^2.27.1"
 python-dotenv = "^0.20.0"
-dotenv = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
