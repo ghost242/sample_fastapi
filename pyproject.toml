@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "deploy_tester"
+version = "0.1.0"
+description = ""
+authors = ["jeffrey <aroh@madup.com>"]
+packages = [
+    { include="**/*.py", from="src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.78.0"
+SQLAlchemy = "^1.4.36"
+pg8000 = "^1.29.1"
+pytest = "^7.1.2"
+requests = "^2.27.1"
+python-dotenv = "^0.20.0"
+dotenv = "^0.0.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+
+[tool.poetry.scripts]
+start = 'main:start'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+

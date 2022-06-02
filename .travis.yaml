@@ -1,0 +1,26 @@
+os: linux
+dist: bionic
+language: python
+services:
+- docker
+env:
+  global:
+  - EB_REGION=ap-northeast-2
+python:
+- 3.8
+before_install:
+- docker run --name madroid-pg -e TZ=Asia/Seoul -e POSTGRES_USER=aurora -e POSTGRES_PASSWORD=password -e POSTGRES_DB=aurora -d postgres:13.4-alpine
+- docker ps -a
+script:
+- pytest -v
+before_deploy:
+- if [ $TRAVIS_BRANCH == "main" ]; then export EB_ENV=aurora-api-prd; fi
+- if [ $TRAVIS_BRANCH == "develop" ]; then export EB_ENV=aurora-api-dev; fi
+- export REPO_NAME=$(echo $TRAVIS_REPO_SLUG | sed "s_^.*/__")
+- export ELASTIC_BEANSTALK_LABEL=${REPO_NAME}-${TRAVIS_COMMIT::7}-$(date +%y%m%d%H%M%S)
+- chmod +x ./bin/upload_image.sh
+- "./bin/upload_image.sh"
+- chmod +x ./bin/elb_version_check.py
+- python bin/elb_version_check.py
+- zip -r source.zip ./Dockerrun.aws.json .ebextensions .platform
+deploy:
