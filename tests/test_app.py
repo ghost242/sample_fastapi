@@ -1,12 +1,7 @@
 from fastapi.testclient import TestClient
-
-from src.app import service_initializer
 from src import service_app
 
 client = TestClient(service_app)
-
-def pytest_sessionstart():
-    service_initializer()
 
 def test_app_index():
     response = client.get("/")
