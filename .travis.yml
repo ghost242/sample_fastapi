@@ -6,9 +6,8 @@ services:
 python:
 - 3.8
 before_install:
-- docker run -p 127.0.0.1:5432:5432 --name madroid-pg -e TZ=Asia/Seoul -e POSTGRES_USER=aurora -e 
-  POSTGRES_PASSWORD=password -e 
-  POSTGRES_DB=aurora -d postgres:13.4
+- docker run -p 127.0.0.1:5432:5432 --name madroid-pg -e TZ=Asia/Seoul -e POSTGRES_USER=admin -e
+- POSTGRES_PASSWORD=password -e POSTGRES_DB=madroid -d postgres:13.4
 - docker ps -a
 - pip install -r requirements.txt
 script:
